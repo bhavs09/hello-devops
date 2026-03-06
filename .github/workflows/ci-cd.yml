@@ -34,21 +34,6 @@ jobs:
       - name: Push to DockerHub
         run: docker push ${{ secrets.DOCKER_USERNAME }}/hello-devops:${{ github.run_number }}
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_version: 1.5.0
-
-      - name: Terraform Init
-        run: terraform init
-        working-directory: terraform
-
-      - name: Terraform Apply
-        run: terraform apply -auto-approve
-        working-directory: terraform
-        env:
-          TF_VAR_docker_image: ${{ secrets.DOCKER_USERNAME }}/hello-devops:${{ github.run_number }}
-
       - name: Setup Kubectl
         uses: azure/setup-kubectl@v3
         with:
