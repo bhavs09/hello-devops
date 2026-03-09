@@ -15,9 +15,9 @@ resource "docker_image" "hello_devops" {
 }
 
 resource "docker_container" "hello_devops" {
-  name  = "hello-devops-app"
-  image = docker_image.hello_devops.image_id
-
+  name      = "hello-devops-app"
+  image     = docker_image.hello_devops.image_id
+  must_run  = false
   ports {
     internal = 8080
     external = 8080
